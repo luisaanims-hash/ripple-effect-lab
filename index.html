@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Ripple Effect Lab</title>
     <style>
-        /* ... (keep all existing CSS the same) ... */
         * {
             margin: 0;
             padding: 0;
@@ -20,24 +19,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 10px;
+            padding: 20px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             width: 100%;
         }
 
         h1 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
             opacity: 0.9;
         }
 
@@ -45,8 +44,8 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            max-width: 1400px;
-            height: 85vh;
+            max-width: 1200px;
+            height: 80vh;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             overflow: hidden;
@@ -57,21 +56,299 @@
             display: none;
             flex-direction: column;
             height: 100%;
-            padding: 15px;
+            padding: 20px;
         }
 
         .active {
             display: flex;
         }
 
-        /* ... (keep all other CSS exactly as before) ... */
+        /* Introduction Screen Styles */
+        #introduction-screen {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
 
-        /* Add these new styles for enhanced exit ticket */
+        .intro-content {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .intro-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4da8da;
+        }
+
+        .intro-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .intro-content ul {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .intro-content li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            color: #4da8da;
+            font-weight: bold;
+        }
+
+        .start-lab-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .start-lab-btn:hover {
+            background: #219653;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Start Screen Styles */
+        #start-screen {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .scenario-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .scenario-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .scenario-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+            border-color: #4da8da;
+        }
+
+        .scenario-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .scenario-card p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Pond Screen Styles */
+        #pond-screen {
+            flex-direction: row;
+        }
+
+        .pebbles-panel {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-right: 20px;
+            overflow-y: auto;
+        }
+
+        .pebbles-panel h2 {
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+
+        .pebble-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pebble-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .pebble-item.active {
+            background: rgba(77, 168, 218, 0.4);
+            border-left: 4px solid #4da8da;
+        }
+
+        .pond-container {
+            flex: 1;
+            position: relative;
+            background: linear-gradient(to bottom, #1e5799, #207cca);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pond {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .ripple-text {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            max-width: 250px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+
+        .ripple-text.active {
+            opacity: 1;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        button {
+            background: #4da8da;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background: #3d8fc7;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .reset-btn {
+            background: #e74c3c;
+        }
+
+        .reset-btn:hover {
+            background: #c0392b;
+        }
+
+        .exit-ticket-btn {
+            background: #27ae60;
+        }
+
+        .exit-ticket-btn:hover {
+            background: #219653;
+        }
+
+        /* Instructions */
+        .instructions {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        /* Exit Ticket Screen Styles */
+        #exit-ticket-screen {
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .exit-ticket-container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+        .exit-ticket-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
         .exit-ticket-controls {
             display: flex;
             justify-content: space-between;
             margin-top: 25px;
-            gap: 15px;
+            gap: 10px;
         }
 
         .submit-btn {
@@ -82,24 +359,78 @@
             background: #8e44ad;
         }
 
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #pond-screen {
+                flex-direction: column;
+            }
+            
+            .pebbles-panel {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+                max-height: 200px;
+            }
+            
+            .pond-container {
+                min-height: 400px;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .exit-ticket-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
-        .modern-parallel {
-            border-left: 4px solid #e74c3c !important;
-        }
+        /* Print Styles */
+        @media print {
+            body, .container {
+                background: white !important;
+                color: black !important;
+                box-shadow: none !important;
+                height: auto !important;
+                min-height: auto !important;
+            }
 
-        .modern-parallel .ripple-date {
-            color: #e74c3c !important;
+            header, .controls, .pebbles-panel, .pond-container, 
+            #start-screen, #pond-screen, #introduction-screen, .instructions, 
+            .exit-ticket-btn, .back-btn, .reset-btn {
+                display: none !important;
+            }
+
+            #exit-ticket-screen {
+                display: flex !important;
+                height: auto !important;
+                padding: 0 !important;
+            }
+
+            .exit-ticket-container {
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+            }
+
+            .form-group input, .form-group textarea, .form-group select {
+                background: white !important;
+                color: black !important;
+                border: 1px solid black !important;
+            }
+
+            .print-btn, .submit-btn {
+                display: none !important;
+            }
         }
     </style>
     <!-- Add jsPDF library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <header>
@@ -136,33 +467,27 @@
             <div class="scenario-list" id="scenario-list">
                 <!-- Scenarios will be populated by JavaScript -->
             </div>
-            <div class="nav-buttons">
-                <button id="to-exit-ticket-from-start">Go to Exit Ticket</button>
-            </div>
         </div>
 
         <!-- Pond Screen -->
         <div id="pond-screen" class="screen">
-            <div class="pond-area">
-                <div class="pebbles-panel">
-                    <h2 id="scenario-title">Scenario Title</h2>
-                    <div id="pebbles-list">
-                        <!-- Pebbles will be populated by JavaScript -->
-                    </div>
-                </div>
-                <div class="pond-container">
-                    <div class="pond" id="pond">
-                        <!-- Ripples and text will be added here by JavaScript -->
-                    </div>
+            <div class="pebbles-panel">
+                <h2 id="scenario-title">Scenario Title</h2>
+                <div id="pebbles-list">
+                    <!-- Pebbles will be populated by JavaScript -->
                 </div>
             </div>
-            
+            <div class="pond-container">
+                <div class="pond" id="pond">
+                    <!-- Ripples and text will be added here by JavaScript -->
+                </div>
+            </div>
             <div class="controls">
                 <button id="back-btn">Back to Scenarios</button>
                 <button id="exit-ticket-btn" class="exit-ticket-btn">Exit Ticket</button>
                 <button id="reset-btn" class="reset-btn">Reset Ripples</button>
             </div>
-            <p class="instructions">Click on a cause to see its consequences ripple through history. Each ripple shows the timeline of interconnected events.</p>
+            <p class="instructions">Click on a cause to see its consequences ripple through history</p>
         </div>
 
         <!-- Exit Ticket Screen -->
@@ -189,34 +514,10 @@
                     <label for="student-answer">Your Answer:</label>
                     <textarea id="student-answer" placeholder="Type your response here..."></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="historical-scenario">Historical Scenario Studied:</label>
-                    <select id="historical-scenario">
-                        <option value="">Select a historical scenario</option>
-                        <option value="gilded-age">The Gilded Age</option>
-                        <option value="great-depression">Great Depression & Dust Bowl</option>
-                        <option value="new-deal-rural">New Deal - Rural Electrification</option>
-                        <option value="new-deal-dams">New Deal - Big Dam Projects</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="modern-scenario">Modern Scenario Studied:</label>
-                    <select id="modern-scenario">
-                        <option value="">Select a modern scenario</option>
-                        <option value="modern-agriculture">Modern Industrial Agriculture</option>
-                        <option value="green-transition">Green Energy Transition</option>
-                        <option value="tech-revolution">Digital Technology Revolution</option>
-                        <option value="modern-infrastructure">Modern Infrastructure Development</option>
-                    </select>
-                </div>
                 <div class="exit-ticket-controls">
                     <button id="back-from-exit-btn">Back to Lab</button>
                     <button id="submit-btn" class="submit-btn">Submit & Download PDF</button>
                     <button id="print-btn" class="print-btn">Print Only</button>
-                </div>
-                <div class="nav-buttons">
-                    <button id="to-scenarios-from-exit">Back to Scenarios</button>
-                    <button id="to-intro-from-exit">Back to Introduction</button>
                 </div>
             </div>
         </div>
@@ -234,61 +535,27 @@
                         {
                             title: "Unchecked Logging in Wisconsin (1860s-1870s)",
                             ripples: [
-                                {
-                                    date: "1860s-1870s",
-                                    content: "Millions of acres of forest are clear-cut for lumber, leaving dry 'slash' (wood debris) that becomes highly flammable"
-                                },
-                                {
-                                    date: "1871",
-                                    content: "Boom towns like Peshtigo are built entirely from wood to support the lumber industry, creating dense communities in fire-prone areas"
-                                },
-                                {
-                                    date: "October 8, 1871",
-                                    content: "The Great Peshtigo Fire: A perfect storm of drought, high winds, and dry slash creates the deadliest fire in US history, killing 1,500-2,500 people and destroying entire ecosystems"
-                                }
+                                "Millions of acres of forest are clear-cut for lumber, leaving dry 'slash' (wood debris) that becomes highly flammable",
+                                "Boom towns like Peshtigo are built entirely from wood to support the lumber industry, creating dense communities in fire-prone areas",
+                                "The Great Peshtigo Fire: A perfect storm of drought, high winds, and dry slash creates the deadliest fire in US history, killing 1,500-2,500 people and destroying entire ecosystems"
                             ]
                         },
                         {
                             title: "Railroad Expansion & Land Grants (1860s-1890s)",
                             ripples: [
-                                {
-                                    date: "1862-1871",
-                                    content: "Federal government grants 170 million acres to railroad companies to encourage transcontinental expansion"
-                                },
-                                {
-                                    date: "1870s-1890s",
-                                    content: "Railroads create massive fortunes for industrialists while displacing Native American tribes from their ancestral lands"
-                                },
-                                {
-                                    date: "1880s-1900s",
-                                    content: "Railroad monopolies lead to price discrimination against farmers, sparking the Populist movement and demands for regulation"
-                                },
-                                {
-                                    date: "1890s",
-                                    content: "Wealth concentration in railroad magnates contributes to extreme income inequality that characterizes the Gilded Age"
-                                }
+                                "Federal government grants 170 million acres to railroad companies to encourage transcontinental expansion",
+                                "Railroads create massive fortunes for industrialists while displacing Native American tribes from their ancestral lands",
+                                "Railroad monopolies lead to price discrimination against farmers, sparking the Populist movement and demands for regulation",
+                                "Wealth concentration in railroad magnates contributes to extreme income inequality that characterizes the Gilded Age"
                             ]
                         },
                         {
                             title: "Modern Parallel: California Wildfires (2010s-2020s)",
-                            modern: true,
                             ripples: [
-                                {
-                                    date: "2010-2020",
-                                    content: "Population growth pushes development into wildfire-prone areas while climate change creates drier conditions"
-                                },
-                                {
-                                    date: "2018",
-                                    content: "PG&E power lines spark the Camp Fire, destroying Paradise, CA and killing 85 people - similar infrastructure risks as Peshtigo"
-                                },
-                                {
-                                    date: "2020",
-                                    content: "Record-breaking fire season burns 4.3 million acres in California, forcing mass evacuations and creating air quality crises"
-                                },
-                                {
-                                    date: "2020s",
-                                    content: "Utility companies face bankruptcy from liability, while insurance becomes unaffordable in high-risk areas, creating new economic challenges"
-                                }
+                                "Population growth pushes development into wildfire-prone areas while climate change creates drier conditions",
+                                "PG&E power lines spark the Camp Fire, destroying Paradise, CA and killing 85 people - similar infrastructure risks as Peshtigo",
+                                "Record-breaking fire season burns 4.3 million acres in California, forcing mass evacuations and creating air quality crises",
+                                "Utility companies face bankruptcy from liability, while insurance becomes unaffordable in high-risk areas, creating new economic challenges"
                             ]
                         }
                     ]
@@ -301,65 +568,28 @@
                         {
                             title: "Decades of Prairie Grass Destruction (1900-1930)",
                             ripples: [
-                                {
-                                    date: "1900-1930",
-                                    content: "Native prairie grasses that anchored the soil for centuries are plowed under for wheat farming across the Great Plains"
-                                },
-                                {
-                                    date: "1930-1934",
-                                    content: "Severe drought hits the region. Without grass roots to hold it, topsoil turns to dust and creates massive 'black blizzards'"
-                                },
-                                {
-                                    date: "1935-1940",
-                                    content: "Dust Bowl conditions force 2.5 million people to abandon their farms. Many become 'Okies' migrating to California for work"
-                                },
-                                {
-                                    date: "1930s",
-                                    content: "Refugee camps called 'Hoovervilles' spring up nationwide, creating extreme poverty and social conflict that lasts for years"
-                                }
+                                "Native prairie grasses that anchored the soil for centuries are plowed under for wheat farming across the Great Plains",
+                                "Severe drought hits the region. Without grass roots to hold it, topsoil turns to dust and creates massive 'black blizzards'",
+                                "Dust Bowl conditions force 2.5 million people to abandon their farms. Many become 'Okies' migrating to California for work",
+                                "Refugee camps called 'Hoovervilles' spring up nationwide, creating extreme poverty and social conflict that lasts for years"
                             ]
                         },
                         {
                             title: "Unregulated Bank Failures (1929-1933)",
                             ripples: [
-                                {
-                                    date: "1929-1933",
-                                    content: "9,000 banks fail nationwide. Families lose their entire life savings with no deposit insurance"
-                                },
-                                {
-                                    date: "1930-1932",
-                                    content: "Consumer spending drops 50%. People stop buying cars, appliances, and other goods out of fear and necessity"
-                                },
-                                {
-                                    date: "1933",
-                                    content: "Factories mass-close due to lack of customers. Unemployment reaches 25% - 15 million Americans lose their jobs"
-                                },
-                                {
-                                    date: "1930-1935",
-                                    content: "Mass evictions create homeless populations. Breadlines form as poverty becomes widespread and visible"
-                                }
+                                "9,000 banks fail nationwide. Families lose their entire life savings with no deposit insurance",
+                                "Consumer spending drops 50%. People stop buying cars, appliances, and other goods out of fear and necessity",
+                                "Factories mass-close due to lack of customers. Unemployment reaches 25% - 15 million Americans lose their jobs",
+                                "Mass evictions create homeless populations. Breadlines form as poverty becomes widespread and visible"
                             ]
                         },
                         {
                             title: "Modern Parallel: 2008 Financial Crisis",
-                            modern: true,
                             ripples: [
-                                {
-                                    date: "2000-2007",
-                                    content: "Deregulation and complex financial instruments create a housing bubble similar to 1920s stock speculation"
-                                },
-                                {
-                                    date: "2008",
-                                    content: "Lehman Brothers collapse triggers global financial crisis, reminiscent of 1929 bank failures"
-                                },
-                                {
-                                    date: "2008-2010",
-                                    content: "Mass foreclosures and 8.7 million job losses create modern 'Hoovervilles' and economic desperation"
-                                },
-                                {
-                                    date: "2010s",
-                                    content: "Government bailouts and quantitative easing save system but create wealth inequality and political backlash like New Deal era"
-                                }
+                                "Deregulation and complex financial instruments create a housing bubble similar to 1920s stock speculation",
+                                "Lehman Brothers collapse triggers global financial crisis, reminiscent of 1929 bank failures",
+                                "Mass foreclosures and 8.7 million job losses create modern 'Hoovervilles' and economic desperation",
+                                "Government bailouts and quantitative easing save system but create wealth inequality and political backlash like New Deal era"
                             ]
                         }
                     ]
@@ -372,49 +602,80 @@
                         {
                             title: "Rural Electrification Act of 1936",
                             ripples: [
-                                {
-                                    date: "1936",
-                                    content: "REA provides low-cost loans to rural cooperatives to build electric grids where private companies won't invest"
-                                },
-                                {
-                                    date: "1935-1950",
-                                    content: "Rural electrification jumps from 10% to 90%. Farm families get electric lights, refrigeration, and radios for the first time"
-                                },
-                                {
-                                    date: "Late 1930s-1940s",
-                                    content: "Demand for electric appliances creates new industries and jobs. Rural quality of life improves dramatically"
-                                },
-                                {
-                                    date: "1940s-1950s",
-                                    content: "Massive new power sources are built, primarily hydroelectric dams and coal plants, creating new environmental impacts"
-                                }
+                                "REA provides low-cost loans to rural cooperatives to build electric grids where private companies won't invest",
+                                "Rural electrification jumps from 10% to 90%. Farm families get electric lights, refrigeration, and radios for the first time",
+                                "Demand for electric appliances creates new industries and jobs. Rural quality of life improves dramatically",
+                                "Massive new power sources are built, primarily hydroelectric dams and coal plants, creating new environmental impacts"
                             ]
                         },
                         {
                             title: "Modern Parallel: Digital Divide & AI Revolution",
-                            modern: true,
                             ripples: [
-                                {
-                                    date: "1990s-2000s",
-                                    content: "Internet access becomes essential, creating a 'digital divide' between connected urban and disconnected rural areas"
-                                },
-                                {
-                                    date: "2010s",
-                                    content: "Tech companies like Google dominate information access, similar to how electric companies initially served only profitable areas"
-                                },
-                                {
-                                    date: "2020s",
-                                    content: "AI tools become essential for education and work, creating new inequalities in access and skills"
-                                },
-                                {
-                                    date: "2020s+",
-                                    content: "Like REA, government initiatives attempt to provide broadband access, but face challenges of cost, infrastructure, and corporate resistance"
-                                }
+                                "Internet access becomes essential, creating a 'digital divide' between connected urban and disconnected rural areas",
+                                "Tech companies like Google dominate information access, similar to how electric companies initially served only profitable areas",
+                                "AI tools become essential for education and work, creating new inequalities in access and skills",
+                                "Like REA, government initiatives attempt to provide broadband access, but face challenges of cost, infrastructure, and corporate resistance"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "new-deal-dams",
+                    title: "The New Deal - Big Dam Projects",
+                    description: "Examine the complex legacy of large-scale infrastructure projects",
+                    pebbles: [
+                        {
+                            title: "Grand Coulee Dam Construction (1933-1942)",
+                            ripples: [
+                                "Thousands of unemployed workers get jobs through New Deal programs, providing crucial economic relief",
+                                "Dam completion permanently blocks salmon migration, devastating a food source that sustained communities for millennia",
+                                "Ancestral fishing grounds of Indigenous tribes like the Colville are flooded, violating treaties and destroying cultural sites",
+                                "Dam provides cheap electricity for WWII industries and irrigation for desert farming, but fundamentally alters the Columbia River ecosystem forever"
+                            ]
+                        },
+                        {
+                            title: "Modern Parallel: Renewable Energy Infrastructure",
+                            ripples: [
+                                "Large-scale solar and wind farms provide clean energy but require massive land use, displacing wildlife and local communities",
+                                "Battery production for energy storage creates demand for rare earth minerals with environmental and human rights concerns",
+                                "Transmission lines for renewable energy face similar NIMBY ('Not In My Backyard') opposition as historical infrastructure projects",
+                                "Like dams, modern green infrastructure creates tension between environmental benefits and local ecological/social impacts"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "modern-agriculture",
+                    title: "Modern - Industrial Agriculture",
+                    description: "Follow the chain of consequences from modern farming practices",
+                    pebbles: [
+                        {
+                            title: "Industrial Monoculture Farming (1970s-Present)",
+                            ripples: [
+                                "Farm subsidies encourage fence-row to fence-row planting of corn/soybeans, relying heavily on chemical inputs",
+                                "Soil remains bare for much of the year without diverse root systems to anchor it, leading to erosion",
+                                "Topsoil erodes at alarming rates while chemical runoff creates massive 'Dead Zones' in the Gulf of Mexico",
+                                "While yields are high, soil degradation threatens long-term food security and requires ever-more expensive chemical inputs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "green-transition",
+                    title: "Modern - The 'Green' Transition",
+                    description: "Explore the unintended consequences of transitioning to renewable energy",
+                    pebbles: [
+                        {
+                            title: "Critical Minerals Rush (2010s-Present)",
+                            ripples: [
+                                "Global push for EVs and batteries creates massive demand for lithium, cobalt, and copper",
+                                "New mines open in sensitive areas like Thacker Pass (NV) and developing nations (Congo, Bolivia), often on Indigenous lands",
+                                "Large-scale mining consumes vast water resources in arid regions and risks polluting local ecosystems",
+                                "The solution to climate crisis (caused by 20th-century extraction) creates new 21st-century extraction challenges, repeating historical patterns of environmental justice issues"
                             ]
                         }
                     ]
                 }
-                // ... (other scenarios remain the same)
             ]
         };
 
@@ -487,9 +748,6 @@
         const backFromExitBtn = document.getElementById('back-from-exit-btn');
         const printBtn = document.getElementById('print-btn');
         const submitBtn = document.getElementById('submit-btn');
-        const toExitTicketFromStart = document.getElementById('to-exit-ticket-from-start');
-        const toScenariosFromExit = document.getElementById('to-scenarios-from-exit');
-        const toIntroFromExit = document.getElementById('to-intro-from-exit');
 
         // Current state
         let currentScenario = null;
@@ -510,15 +768,12 @@
             content.scenarios.forEach(scenario => {
                 const scenarioCard = document.createElement('div');
                 scenarioCard.className = 'scenario-card';
+                scenarioCard.dataset.id = scenario.id;
+                
                 scenarioCard.innerHTML = `
                     <h3>${scenario.title}</h3>
                     <p>${scenario.description}</p>
-                    <small>${scenario.pebbles.length} cause${scenario.pebbles.length > 1 ? 's' : ''} to explore</small>
                 `;
-                
-                scenarioCard.addEventListener('click', () => {
-                    selectScenario(scenario.id);
-                });
                 
                 scenarioList.appendChild(scenarioCard);
             });
@@ -526,11 +781,16 @@
 
         // Set up event listeners
         function setupEventListeners() {
-            startLabBtn.addEventListener('click', () => {
-                introductionScreen.classList.remove('active');
-                startScreen.classList.add('active');
+            // Scenario selection
+            scenarioList.addEventListener('click', e => {
+                const scenarioCard = e.target.closest('.scenario-card');
+                if (scenarioCard) {
+                    const scenarioId = scenarioCard.dataset.id;
+                    selectScenario(scenarioId);
+                }
             });
             
+            // Pebble selection
             pebblesList.addEventListener('click', e => {
                 const pebbleItem = e.target.closest('.pebble-item');
                 if (pebbleItem) {
@@ -539,29 +799,24 @@
                 }
             });
             
-            // Navigation
+            // Navigation buttons
             backBtn.addEventListener('click', goBackToScenarios);
             exitTicketBtn.addEventListener('click', showExitTicket);
             resetBtn.addEventListener('click', resetRipples);
             backFromExitBtn.addEventListener('click', goBackToPond);
             printBtn.addEventListener('click', printExitTicket);
             submitBtn.addEventListener('click', submitExitTicket);
-            toExitTicketFromStart.addEventListener('click', showExitTicket);
-            toScenariosFromExit.addEventListener('click', () => {
-                exitTicketScreen.classList.remove('active');
+            startLabBtn.addEventListener('click', () => {
+                introductionScreen.classList.remove('active');
                 startScreen.classList.add('active');
             });
-            toIntroFromExit.addEventListener('click', () => {
-                exitTicketScreen.classList.remove('active');
-                introductionScreen.classList.add('active');
-            });
 
-            // Teacher access to database (hidden feature)
+            // Teacher access to database (hidden feature - press Ctrl+D)
             document.addEventListener('keydown', (e) => {
                 if (e.ctrlKey && e.key === 'd') {
                     e.preventDefault();
                     ResponseDB.exportData();
-                    alert('Response data exported as CSV');
+                    alert('All student responses exported as CSV file!');
                 }
             });
         }
@@ -569,15 +824,17 @@
         // Select a scenario and show the pond screen
         function selectScenario(scenarioId) {
             currentScenario = content.scenarios.find(s => s.id === scenarioId);
-            
             if (!currentScenario) return;
             
+            // Update UI
             scenarioTitle.textContent = currentScenario.title;
             renderPebbles();
             
+            // Switch screens
             startScreen.classList.remove('active');
             pondScreen.classList.add('active');
             
+            // Reset any active ripples
             resetRipples();
         }
 
@@ -587,12 +844,9 @@
             
             currentScenario.pebbles.forEach((pebble, index) => {
                 const pebbleItem = document.createElement('div');
-                pebbleItem.className = `pebble-item ${pebble.modern ? 'modern-parallel' : ''}`;
+                pebbleItem.className = 'pebble-item';
                 pebbleItem.dataset.index = index;
-                pebbleItem.innerHTML = `
-                    ${pebble.title}
-                    ${pebble.modern ? '<br><small>Modern Parallel</small>' : ''}
-                `;
+                pebbleItem.textContent = pebble.title;
                 
                 pebblesList.appendChild(pebbleItem);
             });
@@ -600,94 +854,93 @@
 
         // Select a pebble and show its ripple effects
         function selectPebble(pebbleIndex) {
+            // Clear previous ripples
             resetRipples();
             
+            // Update active pebble
             const pebbleItems = document.querySelectorAll('.pebble-item');
             pebbleItems.forEach(item => item.classList.remove('active'));
             pebbleItems[pebbleIndex].classList.add('active');
             
             activePebble = currentScenario.pebbles[pebbleIndex];
+            
+            // Create ripples
             createRipples(activePebble.ripples);
         }
 
-        // Create ripple animations and text with enhanced positioning
-        function createRipples(rippleData) {
+        // Create ripple animations and text
+        function createRipples(rippleTexts) {
             const centerX = pond.offsetWidth / 2;
             const centerY = pond.offsetHeight / 2;
-            let previousX = centerX;
-            let previousY = centerY;
             
-            rippleData.forEach((data, index) => {
+            rippleTexts.forEach((text, index) => {
                 // Create ripple element
                 const ripple = document.createElement('div');
                 ripple.className = 'ripple';
-                if (activePebble.modern) {
-                    ripple.style.borderColor = 'rgba(231, 76, 60, 0.7)';
-                }
                 
-                const size = 120 + (index * 100);
+                // Size increases with each ripple
+                const size = 100 + (index * 100);
                 ripple.style.width = `${size}px`;
                 ripple.style.height = `${size}px`;
                 ripple.style.left = `${centerX}px`;
                 ripple.style.top = `${centerY}px`;
                 
-                // Create text element with date
+                // Create text element
                 const textElement = document.createElement('div');
-                textElement.className = `ripple-text ${activePebble.modern ? 'modern-parallel' : ''}`;
-                textElement.innerHTML = `
-                    <div class="ripple-date">${data.date}</div>
-                    <div class="ripple-content">${data.content}</div>
-                `;
+                textElement.className = 'ripple-text';
+                textElement.textContent = text;
                 
-                // Position text in a spiral pattern to avoid cutoff
-                const angle = (index * 100) % 360;
-                const radius = 120 + (index * 80);
+                // Position text around the pond
+                const angle = (index * 90) % 360;
+                const radius = 150 + (index * 50);
                 const textX = centerX + radius * Math.cos(angle * Math.PI / 180);
                 const textY = centerY + radius * Math.sin(angle * Math.PI / 180);
                 
-                // Ensure text stays within bounds
-                const boundedX = Math.max(140, Math.min(pond.offsetWidth - 140, textX));
-                const boundedY = Math.max(100, Math.min(pond.offsetHeight - 100, textY));
-                
-                textElement.style.left = `${boundedX}px`;
-                textElement.style.top = `${boundedY}px`;
+                textElement.style.left = `${textX}px`;
+                textElement.style.top = `${textY}px`;
                 
                 // Add to pond
                 pond.appendChild(ripple);
                 pond.appendChild(textElement);
-                activeRipples.push({element: ripple}, {element: textElement});
+                
+                // Store references
+                activeRipples.push({ripple, text: textElement});
                 
                 // Animate with delay
                 setTimeout(() => {
-                    ripple.style.transition = 'all 2.5s ease-out';
+                    ripple.style.transition = 'all 2s ease-out';
                     ripple.style.opacity = '1';
-                    ripple.style.transform = `translate(-50%, -50%) scale(1.8)`;
+                    ripple.style.transform = `translate(-50%, -50%) scale(1.5)`;
                     
                     textElement.classList.add('active');
-                }, index * 1000);
+                }, index * 800);
                 
-                // Fade out ripple but keep text
+                // Fade out ripple after animation
                 setTimeout(() => {
-                    ripple.style.opacity = '0.3';
-                }, (index * 1000) + 2500);
+                    ripple.style.opacity = '0';
+                }, (index * 800) + 2000);
             });
         }
 
         // Reset all ripples
         function resetRipples() {
-            activeRipples.forEach(({element}) => {
-                if (element.parentNode) element.parentNode.removeChild(element);
+            activeRipples.forEach(({ripple, text}) => {
+                if (ripple.parentNode) ripple.parentNode.removeChild(ripple);
+                if (text.parentNode) text.parentNode.removeChild(text);
             });
+            
             activeRipples = [];
             
+            // Clear active pebble
             const activePebbleItem = document.querySelector('.pebble-item.active');
             if (activePebbleItem) {
                 activePebbleItem.classList.remove('active');
             }
+            
             activePebble = null;
         }
 
-        // Navigation functions
+        // Go back to the scenario selection screen
         function goBackToScenarios() {
             pondScreen.classList.remove('active');
             startScreen.classList.add('active');
@@ -695,16 +948,19 @@
             currentScenario = null;
         }
 
+        // Show the exit ticket screen
         function showExitTicket() {
             pondScreen.classList.remove('active');
             exitTicketScreen.classList.add('active');
         }
 
+        // Go back to the pond screen from exit ticket
         function goBackToPond() {
             exitTicketScreen.classList.remove('active');
             pondScreen.classList.add('active');
         }
 
+        // Print the exit ticket as PDF
         function printExitTicket() {
             window.print();
         }
@@ -714,11 +970,9 @@
             const studentName = document.getElementById('student-name').value;
             const studentId = document.getElementById('student-id').value;
             const studentAnswer = document.getElementById('student-answer').value;
-            const historicalScenario = document.getElementById('historical-scenario').value;
-            const modernScenario = document.getElementById('modern-scenario').value;
 
-            if (!studentName || !studentAnswer || !historicalScenario || !modernScenario) {
-                alert('Please fill in all required fields: Name, Answer, and both scenario selections.');
+            if (!studentName || !studentAnswer) {
+                alert('Please fill in both your name and answer.');
                 return;
             }
 
@@ -727,8 +981,6 @@
                 studentName,
                 studentId,
                 answer: studentAnswer,
-                historicalScenario,
-                modernScenario,
                 submissionDate: new Date().toLocaleDateString()
             };
 
@@ -741,8 +993,6 @@
                 document.getElementById('student-name').value = '';
                 document.getElementById('student-id').value = '';
                 document.getElementById('student-answer').value = '';
-                document.getElementById('historical-scenario').value = '';
-                document.getElementById('modern-scenario').value = '';
             } else {
                 alert('Error saving response. Please try again.');
             }
@@ -765,33 +1015,29 @@
             }
             doc.text(`Submission Date: ${response.submissionDate}`, 20, 70);
             
-            // Scenarios studied
-            doc.text(`Historical Scenario: ${document.getElementById('historical-scenario').options[document.getElementById('historical-scenario').selectedIndex].text}`, 20, 85);
-            doc.text(`Modern Scenario: ${document.getElementById('modern-scenario').options[document.getElementById('modern-scenario').selectedIndex].text}`, 20, 95);
-            
             // Question and answer
             doc.setFontSize(14);
-            doc.text('Key Question:', 20, 115);
+            doc.text('Key Question:', 20, 90);
             doc.setFontSize(10);
             const question = "Select one historical scenario and one modern scenario. Based on what you saw in the lab, what is the single most important repeating pattern or lesson you see about the relationship between solving one problem and creating new, unintended problems for people or the environment?";
             const splitQuestion = doc.splitTextToSize(question, 170);
-            doc.text(splitQuestion, 20, 125);
+            doc.text(splitQuestion, 20, 100);
             
             doc.setFontSize(14);
-            doc.text('Student Response:', 20, 155);
+            doc.text('Student Response:', 20, 130);
             doc.setFontSize(11);
             const splitAnswer = doc.splitTextToSize(response.answer, 170);
-            doc.text(splitAnswer, 20, 165);
+            doc.text(splitAnswer, 20, 140);
             
             // Footer
             doc.setFontSize(8);
             doc.text('Generated by The Ripple Effect Lab - Understanding Cause and Consequence Through History', 20, 280);
             
             // Download PDF
-            doc.save(`RippleEffectLab-${response.studentName}-${response.submissionDate}.pdf`);
+            doc.save(`RippleEffectLab-${response.studentName}.pdf`);
         }
 
-        // Initialize the application
+        // Initialize the application when the DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
